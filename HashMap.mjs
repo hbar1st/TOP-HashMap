@@ -75,6 +75,7 @@ export class HashMap {
     const hashCode = this.#hash(key);
     const maxLoad = Math.ceil(this.#capacity * this.#loadFactor);
     this.#hashMap[hashCode].set(key, value);
+
     if (maxLoad < this.length()) {
       //time to expand!
       this.#capacity *= 2;
@@ -82,10 +83,25 @@ export class HashMap {
       //copy over all the values now
       for (let i = 0; i < this.#hashMap.length; i++) {
         this.#hashMap[i].forEach((value, key) => {
-          largerMap[i].set(key, value);
+          const newHashCode = this.#hash(key);
+          largerMap[newHashCode].set(key, value);
         });
       }
       this.#hashMap = largerMap;
+      /*
+      console.log(
+        "load : ",
+        Math.ceil(this.#capacity * this.#loadFactor),
+        "vs current load: ",
+        this.length()
+      );
+      */
     }
+  }
+
+  toString() {
+    let res = "";
+    this.#hashMap.forEach((map) => (res += `[${map.size}]`));
+    return res;
   }
 }

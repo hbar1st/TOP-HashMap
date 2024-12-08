@@ -15,3 +15,13 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 console.log(test.entries());
+console.log(test.toString());
+test.set("moon", "silver");
+
+console.log(test.entries());
+
+console.log(test.toString());
+
+test.set("moon", "antiquewhite");
+
+console.log(test.entries());
